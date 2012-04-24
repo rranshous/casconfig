@@ -5,7 +5,7 @@ import os
 def test_end_to_end():
 
     # setup our config
-    config = CasConfig(configs_base='./tests/configs')
+    config = CasConfig('./tests/configs')
 
     # read in for the tester process the development files
     config.update('tester', 'development')
