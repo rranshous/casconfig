@@ -1,10 +1,10 @@
-from os.path import join, abspath
+from os.path import join, abspath, basename
 import re
 from configsmash import ConfigSmasher
 
 class SelectiveConfigSmasher(ConfigSmasher):
     def __init__(self, to_smash=None, pattern=None):
-        super(SelectiveConfigSmasher,self).__init__(to_smash)
+        ConfigSmasher.__init__(self, to_smash)
         self.pattern = re.compile(pattern)
 
     def _expand(self, path):
@@ -13,17 +13,11 @@ class SelectiveConfigSmasher(ConfigSmasher):
         pattern
         """
 
-        print 'expanding: %s' % path
-
         # get all the file's paths
-        paths = super(SelectiveConfigSmasher,self)._expand(path)
-
-        print 'original: %s' % paths
+        paths = ConfigSmasher._expand(self, path)
 
         # now filter by the pattern
-        paths = filter(paths, lambda p: self.pattern.match(basename(p)))
-
-        print 'filtered: %s' % paths
+        paths = filter(lambda p: self.pattern.match(basename(p)), paths)
 
         return paths
 
@@ -42,12 +36,9 @@ class CasConfig(dict):
         # what type of configs ?
         self._type = None
 
-        print 'args: %s' % str(args)
-        print 'kwargs: %s' % str(kwargs)
-
         super(CasConfig, self).__init__(*args, **kwargs)
 
-    def update(self, _type, proc=None):
+    def setup(self, _type, proc=None):
         """
         reset the config and re-read config files
         _type -- the type of configs
