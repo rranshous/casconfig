@@ -24,11 +24,9 @@ class SelectiveConfigSmasher(ConfigSmasher):
 
 
 class CasConfig(dict):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, configs_base='./configs'):
         # what's the base dir for the configs?
-        self.configs_base = abspath(kwargs.get('configs_base','./configs'))
-        if kwargs.get('configs_base'):
-            del kwargs['configs_base']
+        self.configs_base = abspath(configs_base)
 
         # what process is this config for?
         self._proc = None
@@ -36,7 +34,8 @@ class CasConfig(dict):
         # what type of configs ?
         self._type = None
 
-        dict.__init__(self, *args, **kwargs)
+        # respect
+        dict.__init__(self)
 
     def setup(self, _type, proc=None):
         """
