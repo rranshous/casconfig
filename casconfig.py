@@ -36,7 +36,7 @@ class CasConfig(dict):
         # what type of configs ?
         self._type = None
 
-        super(CasConfig, self).__init__(*args, **kwargs)
+        CasConfig.__init__(self, *args, **kwargs)
 
     def setup(self, _type, proc=None):
         """
