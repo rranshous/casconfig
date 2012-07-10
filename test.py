@@ -4,6 +4,9 @@ import os
 
 def test_end_to_end():
 
+    ## THIS TEST WAS written to work w/o paster being available
+    # to make the value's native types (bool,int)
+
     # setup our config
     config = CasConfig(configs_base='./tests/configs')
 
