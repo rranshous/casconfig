@@ -2,6 +2,10 @@ from os.path import join, abspath, basename
 import re
 from configsmash import ConfigSmasher
 
+version_info = (0, 0, 1)
+__version__ = '.'.join(map(str, version_info))
+version = __version__
+
 class SelectiveConfigSmasher(ConfigSmasher):
     def __init__(self, to_smash=None, pattern=None):
         ConfigSmasher.__init__(self, to_smash)
@@ -20,7 +24,6 @@ class SelectiveConfigSmasher(ConfigSmasher):
         paths = filter(lambda p: self.pattern.match(basename(p)), paths)
 
         return paths
-
 
 
 class CasConfig(dict):
