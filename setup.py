@@ -20,7 +20,6 @@ setup(
         "Topic :: Utilities",
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.2",
     ],
     install_requires=requirements,
 )
